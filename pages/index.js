@@ -11,7 +11,7 @@ import { Whatsapp } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 
 import logo from "../assets/img/logo-fuxion.jpeg"
-import wsp from "../assets/img/whatsapp.png"
+import fondo from "../assets/img/fondo.jpeg"
 import img1 from "../assets/img/carta/1.jpeg"
 import img2 from "../assets/img/carta/2.jpeg"
 import img3 from "../assets/img/carta/3.jpeg"
@@ -29,8 +29,14 @@ export default function Home() {
   }
   return (
     <div className='body'>
+        <Image
+          layout="fill"
+          src={fondo}
+          alt="Fondo Fuxion"
+          className='fondo'
+        />
         <div>
-          <Link href='https://wa.me/message/HNUBBJVSY2LJB1'> 
+          <Link href='https://wa.me/message/HNUBBJVSY2LJB1'>
             <a target="_blank" className='wspButton'>
               <Whatsapp className='wspIcon'/>
             </a> 
@@ -39,8 +45,7 @@ export default function Home() {
 
       <div className={model ? "model open" : "model"}>
         <Image
-          width="800%"
-          height="800%"
+          layout="fill"
           src={tempImgSrc}
           alt="Logo Fuxion"
         />

@@ -1,8 +1,10 @@
 .body {
-    background-color: #000000;
     height: 100%;
     width: 100%;
-    padding-bottom: 400px;
+}
+
+.fondo {
+    z-index: -1;
 }
 
 .img {
@@ -15,12 +17,13 @@
 .buttons {
     height:100%;
     width:100%;
-
 }
+
 .button {
     height: 60px;
     width: 75%; 
     margin:0px auto;
+    z-index: 800;
 }
 
 .model {
@@ -84,7 +87,6 @@
     text-align: center;
     display: grid;
     place-content: center;
-
     font-size: 30px;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
