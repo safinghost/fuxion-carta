@@ -91,7 +91,6 @@ export default function Home() {
           bottom: '0px',
           textAlign: 'center', 
           borderRadius: 3,
-          zIndex: 1000,
         }}
       >
         Horario de atención: 3:00pm a 3:00am
