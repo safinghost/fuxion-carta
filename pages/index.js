@@ -9,24 +9,27 @@ import { XLg } from 'react-bootstrap-icons';
 import { Whatsapp } from 'react-bootstrap-icons';
 
 import Button from 'react-bootstrap/Button';
+import Tooltip from 'react-bootstrap/Tooltip';
 
-import logo from "../assets/img/logo-fuxion.jpeg"
-import fondo from "../assets/img/fondo.jpeg"
-import img1 from "../assets/img/carta/1.jpeg"
-import img2 from "../assets/img/carta/2.jpeg"
-import img3 from "../assets/img/carta/3.jpeg"
-import img4 from "../assets/img/carta/4.jpeg"
-import img5 from "../assets/img/carta/5.jpeg"
+import fondo from "../assets/img/fondo.png"
+import img1 from "../assets/img/carta/carta-2.png"
+import img2 from "../assets/img/carta/carta-3.png"
+import img3 from "../assets/img/carta/carta-4.png"
+import img4 from "../assets/img/carta/carta-5.png"
+import img5 from "../assets/img/carta/carta-6.png"
 
 export default function Home() {
 
   const [model, setModel] = useState(false);
   const [tempImgSrc, setTempImgSrc] = useState(false);
 
+  const [tooltip, setTooltip] = useState(true);
+
   const getImg = (imgSrc) =>{
     setTempImgSrc(imgSrc)
     setModel(true)
   }
+
   return (
     <div className='body'>
         <Image
@@ -36,6 +39,25 @@ export default function Home() {
           className='fondo'
         />
         <div>
+          { tooltip ? 
+          <div
+            onClick={()=>setTooltip(false)}
+            style={{
+              position: 'absolute',
+              backgroundColor: 'rgba(255, 100, 100, 0.85)',
+              padding: '2px 10px',
+              color: 'white',
+              bottom: '90px',
+              right: '30px',
+              borderRadius: 3,
+              zIndex: 1000,
+            }}
+          >
+            Realiza tu pedido o reserva tu box privado!
+          </div>
+          :
+          <></>
+          }
           <Link href='https://wa.me/message/HNUBBJVSY2LJB1'>
             <a target="_blank" className='wspButton'>
               <Whatsapp className='wspIcon'/>
@@ -52,20 +74,27 @@ export default function Home() {
         <XLg onClick={()=> setModel(false)} />
       </div>
 
-      <div className='img'>
-        <Image
-          width="200%"
-          height="200%"
-          src={logo}
-          alt="Logo Fuxion"
-        />
-      </div>
       <div className="d-grid gap-2 buttons">
         <Button onClick={() => getImg(img1)} className='button' variant="primary">Bebidas en Jarra</Button>
         <Button onClick={() => getImg(img2)} className='button' variant="secondary">Bebidas en botella</Button>
         <Button onClick={() => getImg(img3)} className='button' variant="success">Shots, Vino, Cervezas, Gaseosas y Cigarrillos</Button>
         <Button onClick={() => getImg(img4)} className='button' variant="warning">Copas</Button>
         <Button onClick={() => getImg(img5)} className='button' variant="info">Pikeos</Button>
+      </div>
+      <div
+        style={{
+          width: '100%',
+          position: 'absolute',
+          padding: '2px 10px',
+          color: 'white',
+          fontWeight: 'bold',
+          bottom: '0px',
+          textAlign: 'center', 
+          borderRadius: 3,
+          zIndex: 1000,
+        }}
+      >
+        Horario de atención: 3:00pm a 3:00am
       </div>
     </div>
   )
