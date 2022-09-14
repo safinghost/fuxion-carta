@@ -1,22 +1,22 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { XLg } from 'react-bootstrap-icons';
 import { Whatsapp } from 'react-bootstrap-icons';
 
 import Button from 'react-bootstrap/Button';
-import Tooltip from 'react-bootstrap/Tooltip';
 
 import fondo from "../assets/img/fondo.png"
-import img1 from "../assets/img/carta/carta-2.png"
-import img2 from "../assets/img/carta/carta-3.png"
+import img1 from "../assets/img/carta/carta-5.png"
+import img2 from "../assets/img/carta/carta-6.png"
 import img3 from "../assets/img/carta/carta-4.png"
-import img4 from "../assets/img/carta/carta-5.png"
-import img5 from "../assets/img/carta/carta-6.png"
+import img4 from "../assets/img/carta/carta-3.png"
+import img5 from "../assets/img/carta/carta-2.png"
 
 export default function Home() {
 
@@ -25,45 +25,62 @@ export default function Home() {
 
   const [tooltip, setTooltip] = useState(true);
 
+  const router = useRouter()
+
   const getImg = (imgSrc) =>{
     setTempImgSrc(imgSrc)
     setModel(true)
+    router.push(`/?images${imgSrc.src()}`, undefined, { shallow: true })
   }
+
+  useEffect(() => {
+    const handleRouteChange = (url, { shallow }) => {
+      if(url == "/"){
+        setModel(false)
+      }
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [])
 
   return (
     <div className='body'>
-        <Image
-          layout="fill"
-          src={fondo}
-          alt="Fondo Fuxion"
-          className='fondo'
-        />
-        <div>
-          { tooltip ? 
-          <div
-            onClick={()=>setTooltip(false)}
-            style={{
-              position: 'absolute',
-              backgroundColor: 'rgba(255, 100, 100, 0.85)',
-              padding: '2px 10px',
-              color: 'white',
-              bottom: '90px',
-              right: '30px',
-              borderRadius: 3,
-              zIndex: 1000,
-            }}
-          >
-            Realiza tu pedido o reserva tu box privado!
-          </div>
-          :
-          <></>
-          }
-          <Link href='https://wa.me/message/HNUBBJVSY2LJB1'>
-            <a target="_blank" className='wspButton'>
-              <Whatsapp className='wspIcon'/>
-            </a> 
-          </Link>
+      <Image
+        layout="fill"
+        src={fondo}
+        alt="Fondo Fuxion"
+        className='fondo'
+      />
+      <div>
+        { tooltip ? 
+        <div
+          onClick={()=>setTooltip(false)}
+          style={{
+            position: 'absolute',
+            backgroundColor: 'rgba(255, 100, 100, 0.85)',
+            padding: '2px 10px',
+            color: 'white',
+            bottom: '90px',
+            right: '30px',
+            borderRadius: 3,
+            zIndex: 1000,
+          }}
+        >
+          Realiza tu pedido o reserva tu box privado!
         </div>
+        :
+        <></>
+        }
+        <Link href='https://wa.me/message/HNUBBJVSY2LJB1'>
+          <a target="_blank" className='wspButton'>
+            <Whatsapp className='wspIcon'/>
+          </a> 
+        </Link>
+      </div>
 
       <div className={model ? "model open" : "model"}>
         <Image
@@ -71,7 +88,7 @@ export default function Home() {
           src={tempImgSrc}
           alt="Logo Fuxion"
         />
-        <XLg onClick={()=> setModel(false)} />
+        <XLg onClick={()=> setModel(false)} />       
       </div>
 
       <div className="d-grid gap-2 buttons">
