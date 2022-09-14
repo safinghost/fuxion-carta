@@ -30,7 +30,7 @@ export default function Home() {
   const getImg = (imgSrc) =>{
     setTempImgSrc(imgSrc)
     setModel(true)
-    router.push(`/?images${imgSrc.src()}`, undefined, { shallow: true })
+    router.push(`/?images${imgSrc.src}`, undefined, { shallow: true })
   }
 
   useEffect(() => {
